@@ -1,0 +1,5 @@
+orbit_media.admin_media_tab:
+  route_name: orbit_media.admin_content
+  title: 'Orbit Media'
+  parent: entity.media.collection
+  weight: 1

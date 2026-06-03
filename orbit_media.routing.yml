@@ -1,0 +1,7 @@
+orbit_media.admin_content:
+  path: '/admin/content/media/orbit-media'
+  defaults:
+    _title: 'Media help'
+    _controller: '\Drupal\orbit_media\Controller\MediaController::overview'
+  requirements:
+    _permission: 'administer media'
