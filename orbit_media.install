@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+
 /**
  * @file
  * Install, update, and uninstall functions for Orbit Media.
@@ -11,7 +14,195 @@ declare(strict_types=1);
  * Implements hook_install().
  */
 function orbit_media_install(): void {
-  // Placeholder for install-time configurations.
+  orbit_media_apply_media_image_displays();
+}
+
+/**
+ * Applies media image form and view display configuration.
+ */
+function orbit_media_apply_media_image_displays(): void {
+  $field_definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('media', 'image');
+
+  $form_default = EntityFormDisplay::load('media.image.default');
+  if ($form_default) {
+    $form_default->setComponent('created', [
+      'type' => 'datetime_timestamp',
+      'weight' => 10,
+      'region' => 'content',
+      'settings' => [],
+      'third_party_settings' => [],
+    ]);
+
+    if (isset($field_definitions['field_media_image'])) {
+      $form_default->setComponent('field_media_image', [
+        'type' => 'image_image',
+        'weight' => 0,
+        'region' => 'content',
+        'settings' => [
+          'progress_indicator' => 'throbber',
+          'preview_image_style' => 'thumbnail',
+        ],
+        'third_party_settings' => [],
+      ]);
+    }
+
+    if (isset($field_definitions['field_tags'])) {
+      $form_default->setComponent('field_tags', [
+        'type' => 'entity_reference_autocomplete_tags',
+        'weight' => 1,
+        'region' => 'content',
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'match_limit' => 10,
+          'size' => 60,
+          'placeholder' => '',
+        ],
+        'third_party_settings' => [],
+      ]);
+    }
+    else {
+      $form_default->removeComponent('field_tags');
+    }
+
+    if (isset($field_definitions['path'])) {
+      $form_default->setComponent('path', [
+        'type' => 'path',
+        'weight' => 30,
+        'region' => 'content',
+        'settings' => [],
+        'third_party_settings' => [],
+      ]);
+    }
+    else {
+      $form_default->removeComponent('path');
+    }
+
+    $form_default->setComponent('status', [
+      'type' => 'boolean_checkbox',
+      'weight' => 100,
+      'region' => 'content',
+      'settings' => [
+        'display_label' => TRUE,
+      ],
+      'third_party_settings' => [],
+    ]);
+
+    $form_default->setComponent('uid', [
+      'type' => 'entity_reference_autocomplete',
+      'weight' => 5,
+      'region' => 'content',
+      'settings' => [
+        'match_operator' => 'CONTAINS',
+        'match_limit' => 10,
+        'size' => 60,
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [],
+    ]);
+
+    $form_default->removeComponent('name');
+    $form_default->save();
+  }
+
+  $form_media_library = EntityFormDisplay::load('media.image.media_library');
+  if ($form_media_library) {
+    if (isset($field_definitions['field_media_image'])) {
+      $form_media_library->setComponent('field_media_image', [
+        'type' => 'image_image',
+        'weight' => 1,
+        'region' => 'content',
+        'settings' => [
+          'progress_indicator' => 'throbber',
+          'preview_image_style' => 'thumbnail',
+        ],
+        'third_party_settings' => [],
+      ]);
+    }
+
+    $form_media_library->removeComponent('created');
+    $form_media_library->removeComponent('field_tags');
+    $form_media_library->removeComponent('name');
+    $form_media_library->removeComponent('path');
+    $form_media_library->removeComponent('status');
+    $form_media_library->removeComponent('uid');
+    $form_media_library->save();
+  }
+
+  $view_default = EntityViewDisplay::load('media.image.default');
+  if ($view_default) {
+    if (isset($field_definitions['field_media_image'])) {
+      $view_default->setComponent('field_media_image', [
+        'type' => 'image',
+        'label' => 'visually_hidden',
+        'settings' => [
+          'image_link' => '',
+          'image_style' => 'large',
+          'image_loading' => [
+            'attribute' => 'lazy',
+          ],
+        ],
+        'third_party_settings' => [],
+        'weight' => 1,
+        'region' => 'content',
+      ]);
+    }
+
+    if (isset($field_definitions['field_tags'])) {
+      $view_default->setComponent('field_tags', [
+        'type' => 'entity_reference_label',
+        'label' => 'above',
+        'settings' => [
+          'link' => TRUE,
+        ],
+        'third_party_settings' => [],
+        'weight' => 2,
+        'region' => 'content',
+      ]);
+    }
+    else {
+      $view_default->removeComponent('field_tags');
+    }
+
+    $view_default->removeComponent('created');
+    $view_default->removeComponent('name');
+    $view_default->removeComponent('thumbnail');
+    $view_default->removeComponent('uid');
+    $view_default->save();
+  }
+
+  $view_media_library = EntityViewDisplay::load('media.image.media_library');
+  if ($view_media_library) {
+    if (isset($field_definitions['thumbnail'])) {
+      $view_media_library->setComponent('thumbnail', [
+        'type' => 'image',
+        'label' => 'hidden',
+        'settings' => [
+          'image_link' => '',
+          'image_style' => 'medium',
+          'image_loading' => [
+            'attribute' => 'lazy',
+          ],
+        ],
+        'third_party_settings' => [],
+        'weight' => 0,
+        'region' => 'content',
+      ]);
+    }
+
+    $view_media_library->removeComponent('created');
+    $view_media_library->removeComponent('field_media_image');
+    $view_media_library->removeComponent('field_tags');
+    $view_media_library->removeComponent('name');
+    $view_media_library->removeComponent('uid');
+    $view_media_library->save();
+  }
+}
+
+/**
+ * Applies display updates for existing installations.
+ */
+function orbit_media_update_11001(): void {
+  orbit_media_apply_media_image_displays();
 }
 
 /**
