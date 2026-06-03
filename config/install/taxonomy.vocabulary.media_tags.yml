@@ -1,0 +1,9 @@
+uuid: 9da900ee-a0c9-4086-a14d-09db3f9ccf6d
+langcode: en
+status: true
+dependencies: {  }
+name: 'Media Tags'
+vid: media_tags
+description: 'Allows the tagging of media assets'
+weight: 0
+new_revision: false
