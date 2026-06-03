@@ -1,0 +1,8 @@
+name: Orbit Media
+type: module
+description: Provides Orbit media functionality.
+package: Orbit
+core_version_requirement: ^11
+php: 8.4
+dependencies:
+  - media:media

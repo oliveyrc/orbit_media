@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Orbit Media logo</title>
+  <desc id="desc">A circular orbit mark surrounding media elements including image and video symbols.</desc>
+  <defs>
+    <linearGradient id="orbit-gradient" x1="78" y1="96" x2="434" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#21A8A3"/>
+      <stop offset="0.52" stop-color="#3164D4"/>
+      <stop offset="1" stop-color="#6D4CC2"/>
+    </linearGradient>
+    <linearGradient id="panel-gradient" x1="158" y1="126" x2="354" y2="386" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF4FF"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#14213D" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="#F7FAFC"/>
+
+  <g fill="none" stroke="url(#orbit-gradient)" stroke-linecap="round">
+    <ellipse cx="256" cy="256" rx="190" ry="92" stroke-width="22" transform="rotate(-24 256 256)"/>
+    <ellipse cx="256" cy="256" rx="190" ry="92" stroke-width="14" opacity="0.28" transform="rotate(36 256 256)"/>
+  </g>
+
+  <circle cx="406" cy="181" r="28" fill="#21A8A3"/>
+  <circle cx="104" cy="323" r="18" fill="#6D4CC2"/>
+
+  <g filter="url(#soft-shadow)">
+    <rect x="156" y="122" width="216" height="268" rx="28" fill="url(#panel-gradient)" stroke="#D9E3F2" stroke-width="4"/>
+
+    <!-- Image frame with mountain icon -->
+    <rect x="188" y="158" width="100" height="100" rx="12" fill="#E5EEFF" stroke="#C8D6EA" stroke-width="3"/>
+    <circle cx="210" cy="180" r="10" fill="#3164D4"/>
+    <path d="M188 238L220 200L242 220L288 170" fill="none" stroke="#6D4CC2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Video play button -->
+    <rect x="304" y="158" width="100" height="100" rx="12" fill="#E5EEFF" stroke="#C8D6EA" stroke-width="3"/>
+    <polygon points="338,188 338,228 378,208" fill="#21A8A3"/>
+
+    <!-- Audio/media bars -->
+    <rect x="188" y="280" width="100" height="80" rx="12" fill="#E5EEFF" stroke="#C8D6EA" stroke-width="3"/>
+    <rect x="205" y="305" width="8" height="30" fill="#3164D4" rx="4"/>
+    <rect x="223" y="295" width="8" height="40" fill="#6D4CC2" rx="4"/>
+    <rect x="241" y="300" width="8" height="35" fill="#21A8A3" rx="4"/>
+    <rect x="259" y="308" width="8" height="27" fill="#3164D4" rx="4"/>
+
+    <!-- Document/gallery icon -->
+    <rect x="304" y="280" width="100" height="80" rx="12" fill="#E5EEFF" stroke="#C8D6EA" stroke-width="3"/>
+    <rect x="318" y="295" width="24" height="20" fill="#3164D4"/>
+    <rect x="350" y="295" width="24" height="20" fill="#6D4CC2"/>
+    <rect x="318" y="325" width="24" height="20" fill="#21A8A3"/>
+    <rect x="350" y="325" width="24" height="20" fill="#C8D6EA"/>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Install, update, and uninstall functions for Orbit Media.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function orbit_media_install(): void {
+  // Placeholder for install-time configurations.
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function orbit_media_uninstall(): void {
+  // Placeholder for uninstall-time cleanup.
+}
