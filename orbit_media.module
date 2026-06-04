@@ -6,3 +6,49 @@
  */
 
 declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_alter().
+ */
+function orbit_media_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+  // Add cancel button to media entity edit forms.
+  if ($form_id === 'media_image_edit_form' || strpos($form_id, 'media_') === 0 && strpos($form_id, '_edit_form') !== FALSE) {
+    // Attach custom button styles library.
+    $form['#attached']['library'][] = 'orbit_media/buttons';
+
+    $form['actions']['cancel'] = [
+      '#type' => 'link',
+      '#title' => t('Cancel'),
+      '#url' => _orbit_media_get_cancel_url(),
+      '#attributes' => [
+        'class' => ['button', 'button--secondary','orbit-media-small-button-reset'],
+      ],
+      '#weight' => 100,
+    ];
+  }
+}
+
+/**
+ * Helper function to get the cancel button redirect URL.
+ */
+function _orbit_media_get_cancel_url(): Url {
+  $request = \Drupal::request();
+
+  // Check for destination parameter first.
+  $destination = $request->query->get('destination');
+  if ($destination) {
+    return Url::fromUserInput($destination);
+  }
+
+  // Fall back to referrer.
+  $referer = $request->headers->get('referer');
+  if ($referer) {
+    return Url::fromUri($referer);
+  }
+
+  // Fall back to media list.
+  return Url::fromRoute('system.admin_content');
+}

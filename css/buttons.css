@@ -1,0 +1,6 @@
+.button.orbit-media-small-button-reset {
+  padding-block: calc(var(--gin-spacing-xs) - 2px) !important;
+  padding-inline: var(--gin-spacing-s) !important;
+  margin: 0 !important;
+  font-size: var(--gin-font-size-xs) !important;
+}
