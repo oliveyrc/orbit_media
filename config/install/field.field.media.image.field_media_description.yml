@@ -1,0 +1,17 @@
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_description
+    - media.type.image
+id: media.image.field_media_description
+field_name: field_media_description
+entity_type: media
+bundle: image
+label: Description
+description: 'A simple description used in the CMS back end, this is also used when searching media in the library.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
