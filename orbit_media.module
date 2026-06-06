@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityInterface;
+
 
 /**
  * Implements hook_form_alter().
@@ -29,6 +31,7 @@ function orbit_media_form_alter(&$form, FormStateInterface $form_state, $form_id
       '#weight' => 100,
     ];
   }
+
 }
 
 /**
@@ -51,4 +54,34 @@ function _orbit_media_get_cancel_url(): Url {
 
   // Fall back to media list.
   return Url::fromRoute('system.admin_content');
+}
+
+/**
+ * Implements hook_entity_operation().
+ *
+ * - Offer media image download
+ */
+function orbit_media_entity_operation(EntityInterface $entity) {
+  $operations = [];
+
+  if ($entity->getEntityTypeId() === 'media') {
+    if ($entity->hasField('field_media_image') && !$entity->get('field_media_image')->isEmpty()) {
+      $file = $entity->get('field_media_image')->entity;
+      if ($file) {
+        $uri = $file->getFileUri();
+        $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
+
+        $operations['download'] = [
+          'title'  => t('Download'),
+          'url'    => Url::fromUri($url),
+          'weight' => 50,
+          'attributes' => [
+            'download' => TRUE,
+          ],
+        ];
+      }
+    }
+  }
+
+  return $operations;
 }

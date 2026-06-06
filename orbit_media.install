@@ -261,32 +261,14 @@ function orbit_media_apply_media_image_displays(): void {
   $view_media_library->removeComponent('name');
   $view_media_library->removeComponent('uid');
   $view_media_library->save();
+
+  $view = \Drupal::entityTypeManager()
+  ->getStorage('view')
+  ->load('media');
+
+if ($view) {
+  $view->delete();
 }
-
-/**
- * Customizes the existing core media view.
- */
-function orbit_media_update_11001(): void {
-  orbit_media_customize_media_view();
-}
-
-/**
- * Helper function to customize the existing media view.
- */
-function orbit_media_customize_media_view(): void {
-  $view = \Drupal::entityTypeManager()->getStorage('view')->load('media');
-  
-  if (!$view) {
-    return;
-  }
-
-  // You can customize the media view here without overriding core config.
-  // Example: Modify display settings, add fields, change filters, etc.
-  // $display = &$view->getDisplay('default');
-  // $display['display_options']['items_per_page'] = 50;
-  // $view->save();
-  
-  // This approach ensures your customizations survive core updates.
 }
 
 /**
