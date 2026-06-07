@@ -22,7 +22,6 @@ class MediaImageInfo extends FieldPluginBase
 
     public function render(ResultRow $values)
     {
-          \Drupal::logger('my_module')->notice('render called for media_image_info');
 
         $media = $values->_entity;
 
@@ -41,7 +40,8 @@ class MediaImageInfo extends FieldPluginBase
                 $height = $item->height;
 
                 return $this->t(
-                    '@size <br/> @w x @h px', [
+                    '@size <br/> @w x @h px<br/> @type', [
+                        '@type'  => $file->getMimeType(),
                     '@size' => $size,
                     '@w'    => $width,
                     '@h'    => $height,
