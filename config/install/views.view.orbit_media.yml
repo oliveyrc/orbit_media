@@ -402,7 +402,7 @@ display:
           admin_label: ''
           entity_type: media
           plugin_id: media_image_info
-          label: 'Image size & dimensions'
+          label: 'Asset details'
           exclude: false
           alter:
             alter_text: false
