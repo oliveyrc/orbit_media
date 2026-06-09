@@ -5,8 +5,6 @@
   "license": "MIT",
   "require": {
     "php": "^8.4",
-    "drupal/media": "*",
-    "drupal/media_library": "*",
     "drupal/media_library_edit": "*",
     "drupal/media_bulk_upload": "*",
     "drupal/dropzonejs": "*",
