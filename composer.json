@@ -11,5 +11,12 @@
     "drupal/media_bulk_upload": "*",
     "drupal/dropzonejs": "*",
     "drupal/glightbox": "*"
-  }
+  },
+  "authors": [
+    {
+      "name": "Richard Olivey",
+      "email": "richard@olivey.net",
+      "role": "Developer"
+    }
+  ],
 }
