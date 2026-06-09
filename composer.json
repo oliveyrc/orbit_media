@@ -2,7 +2,7 @@
   "name": "oliveyrc/orbit_media",
   "type": "drupal-module",
   "description": "Provides Orbit media functionality.",
-  "license": "GPL-2.0-or-later",
+  "license": "MIT",
   "require": {
     "php": "^8.4",
     "drupal/media": "*",
