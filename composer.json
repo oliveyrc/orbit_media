@@ -8,6 +8,8 @@
     "drupal/media": "*",
     "drupal/media_library": "*",
     "drupal/media_library_edit": "*",
-    "drupal/media_bulk_upload": "*"
+    "drupal/media_bulk_upload": "*",
+    "drupal/dropzonejs": "*",
+    "drupal/glightbox": "*"
   }
 }
