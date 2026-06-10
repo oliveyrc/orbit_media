@@ -11,6 +11,23 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Entity\EntityInterface;
 
+/**
+ * Implements hook_theme().
+ */
+function orbit_media_theme($existing, $type, $theme, $path): array {
+  return [
+    'media__image__default' => [
+      'base hook' => 'media',
+      'template' => 'media--image--default',
+      'path' => $path . '/templates',
+    ],
+    'field__media__field_media_image' => [
+      'base hook' => 'field',
+      'template' => 'field--media--field-media-image',
+      'path' => $path . '/templates',
+    ],
+  ];
+}
 
 /**
  * Implements hook_form_alter().
