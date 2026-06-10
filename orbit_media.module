@@ -13,6 +13,18 @@ use Drupal\Core\Entity\EntityInterface;
 
 
 /**
+ * Implements hook_theme().
+ */
+function orbit_media_theme(): array {
+  return [
+    'media__image' => [
+      'template' => 'media--image',
+      'base hook' => 'media',
+    ],
+  ];
+}
+
+/**
  * Implements hook_form_alter().
  */
 function orbit_media_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
