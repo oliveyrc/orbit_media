@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 
 /**
  * Implements hook_install().
@@ -598,7 +596,7 @@ function orbit_media_update_10001(): void {
     ->load('media.field_media_credit');
 
   if (!$field_storage_config) {
-    FieldStorageConfig::create([
+    \Drupal\field\Entity\FieldStorageConfig::create([
       'field_name' => 'field_media_credit',
       'entity_type' => 'media',
       'type' => 'string',
@@ -618,7 +616,7 @@ function orbit_media_update_10001(): void {
     ->load('media.image.field_media_credit');
 
   if (!$field_config) {
-    FieldConfig::create([
+    \Drupal\field\Entity\FieldConfig::create([
       'field_name' => 'field_media_credit',
       'entity_type' => 'media',
       'bundle' => 'image',
