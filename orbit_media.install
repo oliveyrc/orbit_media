@@ -63,6 +63,22 @@ function orbit_media_apply_media_image_displays(): void {
     $form_default->removeComponent('field_media_description');
   }
 
+  if (isset($field_definitions['field_media_credit'])) {
+    $form_default->setComponent('field_media_credit', [
+      'type' => 'string_textfield',
+      'weight' => 3,
+      'region' => 'content',
+      'settings' => [
+        'size' => 60,
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [],
+    ]);
+  }
+  else {
+    $form_default->removeComponent('field_media_credit');
+  }
+
   if (isset($field_definitions['field_media_image'])) {
     $form_default->setComponent('field_media_image', [
       'type' => 'image_image',
@@ -82,7 +98,7 @@ function orbit_media_apply_media_image_displays(): void {
   if (isset($field_definitions['field_tags'])) {
     $form_default->setComponent('field_tags', [
       'type' => 'entity_reference_autocomplete_tags',
-      'weight' => 3,
+      'weight' => 4,
       'region' => 'content',
       'settings' => [
         'match_operator' => 'CONTAINS',
@@ -99,7 +115,7 @@ function orbit_media_apply_media_image_displays(): void {
 
   $form_default->setComponent('status', [
     'type' => 'boolean_checkbox',
-    'weight' => 4,
+    'weight' => 5,
     'region' => 'content',
     'settings' => [
       'display_label' => TRUE,
@@ -138,6 +154,7 @@ function orbit_media_apply_media_image_displays(): void {
 
   $form_media_library->removeComponent('created');
   $form_media_library->removeComponent('field_media_caption');
+  $form_media_library->removeComponent('field_media_credit');
   $form_media_library->removeComponent('field_media_description');
   $form_media_library->removeComponent('field_tags');
   $form_media_library->removeComponent('name');
@@ -183,6 +200,22 @@ function orbit_media_apply_media_image_displays(): void {
   }
   else {
     $view_default->removeComponent('field_media_description');
+  }
+
+  if (isset($field_definitions['field_media_credit'])) {
+    $view_default->setComponent('field_media_credit', [
+      'type' => 'string',
+      'label' => 'above',
+      'settings' => [
+        'link_to_entity' => FALSE,
+      ],
+      'third_party_settings' => [],
+      'weight' => 5,
+      'region' => 'content',
+    ]);
+  }
+  else {
+    $view_default->removeComponent('field_media_credit');
   }
 
   if (isset($field_definitions['field_media_image'])) {
@@ -256,6 +289,7 @@ function orbit_media_apply_media_image_displays(): void {
 
   $view_media_library->removeComponent('created');
   $view_media_library->removeComponent('field_media_caption');
+  $view_media_library->removeComponent('field_media_credit');
   $view_media_library->removeComponent('field_media_description');
   $view_media_library->removeComponent('field_media_image');
   $view_media_library->removeComponent('field_tags');
@@ -548,4 +582,49 @@ function orbit_media_apply_media_video_displays(): void {
  */
 function orbit_media_uninstall(): void {
   // Placeholder for uninstall-time cleanup.
+}
+
+/**
+ * Adds the field_media_credit field to the media image bundle.
+ */
+function orbit_media_update_10001(): void {
+  $entity_type_manager = \Drupal::entityTypeManager();
+
+  // Create field storage if it does not exist yet.
+  $field_storage_config = $entity_type_manager
+    ->getStorage('field_storage_config')
+    ->load('media.field_media_credit');
+
+  if (!$field_storage_config) {
+    \Drupal\field\Entity\FieldStorageConfig::create([
+      'field_name' => 'field_media_credit',
+      'entity_type' => 'media',
+      'type' => 'string',
+      'settings' => [
+        'max_length' => 255,
+        'case_sensitive' => FALSE,
+        'is_ascii' => FALSE,
+      ],
+      'cardinality' => 1,
+      'translatable' => TRUE,
+    ])->save();
+  }
+
+  // Create field instance on the image bundle if it does not exist yet.
+  $field_config = $entity_type_manager
+    ->getStorage('field_config')
+    ->load('media.image.field_media_credit');
+
+  if (!$field_config) {
+    \Drupal\field\Entity\FieldConfig::create([
+      'field_name' => 'field_media_credit',
+      'entity_type' => 'media',
+      'bundle' => 'image',
+      'label' => 'Credit',
+      'required' => FALSE,
+    ])->save();
+  }
+
+  // Update form and view displays.
+  orbit_media_apply_media_image_displays();
 }
