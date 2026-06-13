@@ -7,6 +7,7 @@
     "php": "^8.4",
     "drupal/media_library_edit": "*",
     "drupal/media_bulk_upload": "*",
+    "drupal/image_widget_crop": "*",
     "drupal/dropzonejs": "*",
     "drupal/glightbox": "*"
   },

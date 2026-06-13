@@ -1,0 +1,10 @@
+status: true
+dependencies: {  }
+label: 'Square crop'
+id: square_crop
+description: 'A square crop with an aspect ratio of 1:1. Minimum hard limit of 500px per side.'
+aspect_ratio: '1:1'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: 500
+hard_limit_height: 500

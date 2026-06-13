@@ -10,4 +10,5 @@ dependencies:
   - media_library_edit:media_library_edit
   - media_bulk_upload:media_bulk_upload
   - dropzonejs:dropzonejs
+  - image_widget_crop:image_widget_crop
   - glightbox:glightbox
