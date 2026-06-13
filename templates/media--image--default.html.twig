@@ -19,13 +19,17 @@
     'media',
     'media--type-' ~ media.bundle()|clean_class,
     not media.isPublished() ? 'media--unpublished',
-
   ]
 %}
 <figure{{attributes.addClass(classes)}}>
 	{{ title_suffix.contextual_links }}
 	{% if content %}
-		{{ content|without('field_media_caption') }}
+  <div class="image">
+		{{ content|without('field_media_caption', 'field_media_credit') }}
+{%if not media.field_media_caption.isEmpty() %}
+  <span class="image-credit">{{ media.field_media_credit.value }}</span>
+{%endif %}
+    </div>
 	{% endif %}
   {%if not media.field_media_caption.isEmpty() %}
     <figcaption>{{ media.field_media_caption.value }}</figcaption>
