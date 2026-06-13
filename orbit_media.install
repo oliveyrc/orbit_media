@@ -47,10 +47,26 @@ function orbit_media_apply_media_image_displays(): void {
     $form_default->removeComponent('field_media_caption');
   }
 
+  if (isset($field_definitions['field_media_credit'])) {
+    $form_default->setComponent('field_media_credit', [
+      'type' => 'string_textfield',
+      'weight' => 2,
+      'region' => 'content',
+      'settings' => [
+        'size' => 60,
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [],
+    ]);
+  }
+  else {
+    $form_default->removeComponent('field_media_credit');
+  }
+
   if (isset($field_definitions['field_media_description'])) {
     $form_default->setComponent('field_media_description', [
       'type' => 'string_textfield',
-      'weight' => 2,
+      'weight' => 3,
       'region' => 'content',
       'settings' => [
         'size' => 60,
@@ -82,7 +98,7 @@ function orbit_media_apply_media_image_displays(): void {
   if (isset($field_definitions['field_tags'])) {
     $form_default->setComponent('field_tags', [
       'type' => 'entity_reference_autocomplete_tags',
-      'weight' => 3,
+      'weight' => 4,
       'region' => 'content',
       'settings' => [
         'match_operator' => 'CONTAINS',
@@ -99,7 +115,7 @@ function orbit_media_apply_media_image_displays(): void {
 
   $form_default->setComponent('status', [
     'type' => 'boolean_checkbox',
-    'weight' => 4,
+    'weight' => 5,
     'region' => 'content',
     'settings' => [
       'display_label' => TRUE,
@@ -139,6 +155,7 @@ function orbit_media_apply_media_image_displays(): void {
   $form_media_library->removeComponent('created');
   $form_media_library->removeComponent('field_media_caption');
   $form_media_library->removeComponent('field_media_description');
+  $form_media_library->removeComponent('field_media_credit');
   $form_media_library->removeComponent('field_tags');
   $form_media_library->removeComponent('name');
   $form_media_library->removeComponent('path');
