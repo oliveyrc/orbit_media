@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.16_9_crop
+  module:
+    - crop
+name: inline_image
+label: 'Inline image'
+effects:
+  a0be2be7-2c63-4b3f-acd3-c46621b7bb54:
+    uuid: a0be2be7-2c63-4b3f-acd3-c46621b7bb54
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: 16_9_crop
+      automatic_crop_provider: null
+  ef9b95b1-705a-48ba-aae6-768386b004eb:
+    uuid: ef9b95b1-705a-48ba-aae6-768386b004eb
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 890
+      height: 500
+      anchor: center-center

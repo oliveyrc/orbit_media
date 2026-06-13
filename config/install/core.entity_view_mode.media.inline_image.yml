@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - media
+id: media.inline_image
+label: 'Inline image'
+description: null
+targetEntityType: media
+cache: true

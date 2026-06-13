@@ -27,12 +27,14 @@
 	{% if content %}
   <div class="image">
 		{{ content|without('field_media_caption', 'field_media_credit') }}
-{%if not media.field_media_caption.isEmpty() %}
-  <span class="image-credit">{{ media.field_media_credit.value }}</span>
-{%endif %}
-    </div>
+    {% if not media.field_media_credit.isEmpty() %}
+      <span class="image-credit">{{ media.field_media_credit.value }}</span>
+    {% endif %}
+  </div>
 	{% endif %}
+
   {%if not media.field_media_caption.isEmpty() %}
     <figcaption>{{ media.field_media_caption.value }}</figcaption>
   {% endif %}
+
 </figure>

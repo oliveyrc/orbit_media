@@ -1,5 +1,8 @@
+langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: z3Nl5I7jijQpO7mtAkpjUxItMlehZS1ezhoohYBrVOE
 label: '9:16 Crop'
 id: 9_16_crop
 description: 'A 9:16 image crop.'

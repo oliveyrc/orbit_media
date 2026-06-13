@@ -12,3 +12,4 @@ dependencies:
   - dropzonejs:dropzonejs
   - image_widget_crop:image_widget_crop
   - glightbox:glightbox
+  - responsive_image:responsive_image

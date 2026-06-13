@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.inline_image
+    - image.style.inline_image_2x
+  theme:
+    - scaffold
+id: inline_image
+label: 'Inline image'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: inline_image_2x
+    breakpoint_id: scaffold.tablet
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: inline_image_2x
+    breakpoint_id: scaffold.mobile
+    multiplier: 2x
+breakpoint_group: scaffold
+fallback_image_style: inline_image

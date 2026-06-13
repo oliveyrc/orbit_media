@@ -1,7 +1,10 @@
+langcode: en
 status: true
 dependencies: {  }
-label: '16:9 Crop'
+_core:
+  default_config_hash: '-0RwS68bK5dPPUBsFA5E_MYQVHsXG0wiEBo42b6HQ00'
 id: 16_9_crop
+label: '16:9 Crop'
 description: 'A 16:9 image crop.'
 aspect_ratio: '16:9'
 soft_limit_width: null

@@ -21,6 +21,11 @@ function orbit_media_theme($existing, $type, $theme, $path): array {
       'template' => 'media--image--default',
       'path' => $path . '/templates',
     ],
+    'media__image__inline_image' => [
+      'base hook' => 'media',
+      'template' => 'media--image--inline-image',
+      'path' => $path . '/templates',
+    ],
     'field__media__field_media_image' => [
       'base hook' => 'field',
       'template' => 'field--media--field-media-image',

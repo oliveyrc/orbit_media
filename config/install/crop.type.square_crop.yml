@@ -1,7 +1,10 @@
+langcode: en
 status: true
 dependencies: {  }
-label: 'Square crop'
+_core:
+  default_config_hash: j9aDTlRCtO5XkeJGcWiqhoudKxE6SY4qPYDDPNvL7XY
 id: square_crop
+label: 'Square crop'
 description: 'A square crop with an aspect ratio of 1:1. Minimum hard limit of 500px per side.'
 aspect_ratio: '1:1'
 soft_limit_width: null

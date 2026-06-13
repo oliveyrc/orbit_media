@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.16_9_crop
+  module:
+    - crop
+name: inline_image_2x
+label: 'Inline image 2x'
+effects:
+  587ee51f-df7e-42ff-aa38-5dcdf853a109:
+    uuid: 587ee51f-df7e-42ff-aa38-5dcdf853a109
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: 16_9_crop
+      automatic_crop_provider: null
+  55019c3b-5ad9-49e4-ac30-1c70ba587578:
+    uuid: 55019c3b-5ad9-49e4-ac30-1c70ba587578
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 1780
+      height: 1000
+      anchor: center-center

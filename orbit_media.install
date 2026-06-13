@@ -81,12 +81,20 @@ function orbit_media_apply_media_image_displays(): void {
 
   if (isset($field_definitions['field_media_image'])) {
     $form_default->setComponent('field_media_image', [
-      'type' => 'image_image',
+      'type' => 'image_widget_crop',
       'weight' => 0,
       'region' => 'content',
       'settings' => [
         'progress_indicator' => 'throbber',
         'preview_image_style' => 'thumbnail',
+        'crop_preview_image_style' => 'crop_thumbnail',
+        'crop_list' => [
+          '16_9_crop',
+        ],
+        'crop_types_required' => [],
+        'warn_multiple_usages' => TRUE,
+        'show_crop_area' => FALSE,
+        'show_default_crop' => TRUE,
       ],
       'third_party_settings' => [],
     ]);
