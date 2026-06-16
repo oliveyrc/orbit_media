@@ -9,7 +9,8 @@
     "drupal/media_bulk_upload": "*",
     "drupal/image_widget_crop": "*",
     "drupal/dropzonejs": "*",
-    "drupal/glightbox": "*"
+    "drupal/glightbox": "*",
+    "drupal/views_data_export": "*"
   },
   "authors": [
     {

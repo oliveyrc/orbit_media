@@ -107,3 +107,26 @@ function orbit_media_entity_operation(EntityInterface $entity) {
 
   return $operations;
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for media entities.
+ *
+ * Save some basic image dimention data to the media entity so we can use it
+ * in views.
+ */
+function orbit_media_media_presave(\Drupal\media\MediaInterface $media) {
+  // Only act on new entities (insert, not update).
+  if (!$media->isNew()) {
+    return;
+  }
+
+  // Only act on a specific bundle.
+  if ($media->bundle() !== 'image') {
+    return;
+  }
+
+ $item = $media->get('field_media_image')->first();
+
+  $media->set('field_width', $item->width);
+  $media->set('field_height', $item->height);
+}

@@ -121,9 +121,39 @@ function orbit_media_apply_media_image_displays(): void {
     $form_default->removeComponent('field_tags');
   }
 
+  if (isset($field_definitions['field_height'])) {
+    $form_default->setComponent('field_height', [
+      'type' => 'number',
+      'weight' => 5,
+      'region' => 'content',
+      'settings' => [
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [],
+    ]);
+  }
+  else {
+    $form_default->removeComponent('field_height');
+  }
+
+  if (isset($field_definitions['field_width'])) {
+    $form_default->setComponent('field_width', [
+      'type' => 'number',
+      'weight' => 6,
+      'region' => 'content',
+      'settings' => [
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [],
+    ]);
+  }
+  else {
+    $form_default->removeComponent('field_width');
+  }
+
   $form_default->setComponent('status', [
     'type' => 'boolean_checkbox',
-    'weight' => 5,
+    'weight' => 7,
     'region' => 'content',
     'settings' => [
       'display_label' => TRUE,
@@ -186,7 +216,7 @@ function orbit_media_apply_media_image_displays(): void {
         'link_to_entity' => FALSE,
       ],
       'third_party_settings' => [],
-      'weight' => 3,
+      'weight' => 1,
       'region' => 'content',
     ]);
   }
@@ -202,7 +232,7 @@ function orbit_media_apply_media_image_displays(): void {
         'link_to_entity' => FALSE,
       ],
       'third_party_settings' => [],
-      'weight' => 4,
+      'weight' => 2,
       'region' => 'content',
     ]);
   }
@@ -222,7 +252,7 @@ function orbit_media_apply_media_image_displays(): void {
         ],
       ],
       'third_party_settings' => [],
-      'weight' => 1,
+      'weight' => 0,
       'region' => 'content',
     ]);
   }
@@ -232,6 +262,8 @@ function orbit_media_apply_media_image_displays(): void {
 
   $view_default->removeComponent('field_media_description');
   $view_default->removeComponent('field_tags');
+  $view_default->removeComponent('field_height');
+  $view_default->removeComponent('field_width');
 
   $view_default->removeComponent('created');
   $view_default->removeComponent('name');

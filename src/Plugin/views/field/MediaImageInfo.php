@@ -90,13 +90,7 @@ class MediaImageInfo extends FieldPluginBase
                 return $this->t('N/A');
         }
 
-            $lines = [
-                    (string) $this->t(
-                        'Size: @size',
-                        ['@size' => ByteSizeMarkup::create($file->getSize())]
-                    ),
-            ];
-
+          $lines = [];
             $item = $media->get('field_media_image')->first();
             if ($item && $item->width && $item->height) {
                     $lines[] = (string) $this->t(

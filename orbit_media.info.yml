@@ -13,3 +13,4 @@ dependencies:
   - image_widget_crop:image_widget_crop
   - glightbox:glightbox
   - responsive_image:responsive_image
+  - views_data_export:views_data_export
