@@ -103,6 +103,24 @@ function orbit_media_entity_operation(EntityInterface $entity) {
         ];
       }
     }
+
+ if ($entity->hasField('field_media_video_file') && !$entity->get('field_media_video_file')->isEmpty()) {
+      $file = $entity->get('field_media_video_file')->entity;
+      if ($file) {
+        $uri = $file->getFileUri();
+        $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
+
+        $operations['download'] = [
+          'title'  => t('Download'),
+          'url'    => Url::fromUri($url),
+          'weight' => 50,
+          'attributes' => [
+            'download' => TRUE,
+          ],
+        ];
+      }
+    }
+
   }
 
   return $operations;
