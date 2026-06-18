@@ -14,3 +14,4 @@ dependencies:
   - glightbox:glightbox
   - responsive_image:responsive_image
   - views_data_export:views_data_export
+  - media_bulk_upload_dropzonejs:media_bulk_upload_dropzonejs

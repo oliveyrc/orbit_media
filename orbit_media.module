@@ -48,12 +48,39 @@ function orbit_media_form_alter(&$form, FormStateInterface $form_state, $form_id
       '#title' => t('Cancel'),
       '#url' => _orbit_media_get_cancel_url(),
       '#attributes' => [
-        'class' => ['button', 'button--secondary','orbit-media-small-button-reset'],
+        'class' => [
+          'button',
+          'button--secondary',
+          'orbit-media-small-button-reset',
+        ],
       ],
       '#weight' => 100,
     ];
   }
+}
 
+/**
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ *
+ * @return void
+ */
+function orbit_media_form_media_image_edit_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+  $form['field_width']['widget'][0]['value']['#disabled'] = TRUE;
+  $form['field_height']['widget'][0]['value']['#disabled'] = TRUE;
+}
+
+/**
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ *
+ * @return void
+ */
+function orbit_media_form_media_image_add_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+  $form['field_width']['widget'][0]['value']['#disabled'] = TRUE;
+  $form['field_height']['widget'][0]['value']['#disabled'] = TRUE;
 }
 
 /**
@@ -87,15 +114,17 @@ function orbit_media_entity_operation(EntityInterface $entity) {
   $operations = [];
 
   if ($entity->getEntityTypeId() === 'media') {
-    if ($entity->hasField('field_media_image') && !$entity->get('field_media_image')->isEmpty()) {
+    if ($entity->hasField('field_media_image') && !$entity->get('field_media_image')
+        ->isEmpty()) {
       $file = $entity->get('field_media_image')->entity;
       if ($file) {
         $uri = $file->getFileUri();
-        $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
+        $url = \Drupal::service('file_url_generator')
+          ->generateAbsoluteString($uri);
 
         $operations['download'] = [
-          'title'  => t('Download'),
-          'url'    => Url::fromUri($url),
+          'title' => t('Download'),
+          'url' => Url::fromUri($url),
           'weight' => 50,
           'attributes' => [
             'download' => TRUE,
@@ -104,15 +133,17 @@ function orbit_media_entity_operation(EntityInterface $entity) {
       }
     }
 
- if ($entity->hasField('field_media_video_file') && !$entity->get('field_media_video_file')->isEmpty()) {
+    if ($entity->hasField('field_media_video_file') && !$entity->get('field_media_video_file')
+        ->isEmpty()) {
       $file = $entity->get('field_media_video_file')->entity;
       if ($file) {
         $uri = $file->getFileUri();
-        $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
+        $url = \Drupal::service('file_url_generator')
+          ->generateAbsoluteString($uri);
 
         $operations['download'] = [
-          'title'  => t('Download'),
-          'url'    => Url::fromUri($url),
+          'title' => t('Download'),
+          'url' => Url::fromUri($url),
           'weight' => 50,
           'attributes' => [
             'download' => TRUE,
@@ -120,7 +151,6 @@ function orbit_media_entity_operation(EntityInterface $entity) {
         ];
       }
     }
-
   }
 
   return $operations;
@@ -143,8 +173,25 @@ function orbit_media_media_presave(\Drupal\media\MediaInterface $media) {
     return;
   }
 
- $item = $media->get('field_media_image')->first();
+  $item = $media->get('field_media_image')->first();
 
   $media->set('field_width', $item->width);
   $media->set('field_height', $item->height);
+}
+
+function orbit_media_logo_svg_url(): string {
+  $module_path = \Drupal::service('extension.list.module')
+    ->getPath('orbit_media');
+  return \Drupal::service('file_url_generator')
+    ->generateString($module_path . '/assets/logo.svg');
+}
+
+/**
+ * Common footer function for Oyster admin pages.
+ */
+function orbit_media_page_footer(): array {
+  $build['footer'] = [
+    '#markup' => '<img src="' . orbit_media_logo_svg_url() . '" alt="Oyster design logo" align="right" width="148" height="45" />',
+  ];
+  return $build;
 }
