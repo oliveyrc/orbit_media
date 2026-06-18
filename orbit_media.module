@@ -181,31 +181,6 @@ function orbit_media_media_presave(\Drupal\media\MediaInterface $media) {
   $media->set('field_height', $item->height);
 }
 
-function orbit_media_logo_svg_url(): string {
-  $module_path = \Drupal::service('extension.list.module')
-    ->getPath('orbit_media');
-  return \Drupal::service('file_url_generator')
-    ->generateString($module_path . '/assets/logo.svg');
-}
-
-/**
- * Common footer function for Oyster admin pages.
- *
- * @param bool $string
- *   If TRUE, return a rendered string instead of a render array.
- */
-function orbit_media_page_footer($string = FALSE) {
-  $build['footer'] = [
-    '#markup' => '<img src="' . orbit_media_logo_svg_url() . '" alt="Oyster design logo" align="right" width="148" height="45" />',
-  ];
-
-  if ($string) {
-    $build = \Drupal::service('renderer')->render($build);
-  }
-  return $build;
-}
-
-
 function orbit_media_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
   if ($view->id() == 'orbit_media' && $display_id === 'media_page_list') {
     $options = array(
@@ -217,7 +192,7 @@ function orbit_media_views_pre_view(ViewExecutable $view, $display_id, array &$a
       'admin_label' => '',
       'empty' => TRUE,
       'tokenize' => FALSE,
-      'content' => orbit_media_page_footer(TRUE),
+      'content' => orbit_page_footer(TRUE),
       'plugin_id' => 'text_custom',
     );
 
