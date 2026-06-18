@@ -8,8 +8,10 @@
 declare(strict_types=1);
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_theme().
@@ -188,10 +190,37 @@ function orbit_media_logo_svg_url(): string {
 
 /**
  * Common footer function for Oyster admin pages.
+ *
+ * @param bool $string
+ *   If TRUE, return a rendered string instead of a render array.
  */
-function orbit_media_page_footer(): array {
+function orbit_media_page_footer($string = FALSE) {
   $build['footer'] = [
     '#markup' => '<img src="' . orbit_media_logo_svg_url() . '" alt="Oyster design logo" align="right" width="148" height="45" />',
   ];
+
+  if ($string) {
+    $build = \Drupal::service('renderer')->render($build);
+  }
   return $build;
+}
+
+
+function orbit_media_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() == 'orbit_media' && $display_id === 'media_page_list') {
+    $options = array(
+      'id' => 'area_text_custom',
+      'table' => 'views',
+      'field' => 'area_text_custom',
+      'relationship' => 'none',
+        'group_type' => 'none',
+      'admin_label' => '',
+      'empty' => TRUE,
+      'tokenize' => FALSE,
+      'content' => orbit_media_page_footer(TRUE),
+      'plugin_id' => 'text_custom',
+    );
+
+    $view->setHandler('media_page_list', 'footer', 'area_text_custom', $options);
+  }
 }
