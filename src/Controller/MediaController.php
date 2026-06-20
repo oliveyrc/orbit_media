@@ -20,6 +20,10 @@ class MediaController extends ControllerBase {
   public function overview(): array {
     $build = [];
 
+    $build['wrapper_start'] = [
+      '#markup' => '<div class="gin-layer-wrapper">',
+    ];
+
     $build['content'] = [
       '#markup' => $this->t('<p>PNG, JPG and SVG each have different strengths, and choosing the right format can have a significant impact on image quality, accessibility and page performance. JPG (or JPEG) is generally the best choice for photographs and complex images containing lots of colours, gradients and detail. It uses compression to keep file sizes small, making it ideal for banners, hero images and editorial photography where fast page loading is important. The trade-off is that JPG compression is lossy, meaning image quality can gradually degrade if the file is repeatedly edited and saved.</p>'),
     ];
@@ -30,6 +34,10 @@ class MediaController extends ControllerBase {
 
     $build['content_3'] = [
       '#markup' => $this->t('<p>As a general rule: use JPG for photographs, PNG for transparent or detailed graphics, and SVG for logos, icons and scalable artwork.</p>'),
+    ];
+
+    $build['wrapper_end'] = [
+      '#markup' => '</div>',
     ];
 
     $build['footer'] = orbit_page_footer();
