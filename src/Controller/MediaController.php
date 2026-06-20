@@ -32,7 +32,7 @@ class MediaController extends ControllerBase {
       '#markup' => $this->t('<p>As a general rule: use JPG for photographs, PNG for transparent or detailed graphics, and SVG for logos, icons and scalable artwork.</p>'),
     ];
 
-    $build['footer'] = orbit_media_page_footer();
+    $build['footer'] = orbit_page_footer();
 
     return $build;
   }
