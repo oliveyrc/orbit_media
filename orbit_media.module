@@ -7,8 +7,8 @@
 
 declare(strict_types=1);
 
+use Drupal\media\MediaInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\views\ViewExecutable;
@@ -110,14 +110,14 @@ function _orbit_media_get_cancel_url(): Url {
 /**
  * Implements hook_entity_operation().
  *
- * - Offer media image download
+ * - Offer media image download.
  */
 function orbit_media_entity_operation(EntityInterface $entity) {
   $operations = [];
 
   if ($entity->getEntityTypeId() === 'media') {
     if ($entity->hasField('field_media_image') && !$entity->get('field_media_image')
-        ->isEmpty()) {
+      ->isEmpty()) {
       $file = $entity->get('field_media_image')->entity;
       if ($file) {
         $uri = $file->getFileUri();
@@ -136,7 +136,7 @@ function orbit_media_entity_operation(EntityInterface $entity) {
     }
 
     if ($entity->hasField('field_media_video_file') && !$entity->get('field_media_video_file')
-        ->isEmpty()) {
+      ->isEmpty()) {
       $file = $entity->get('field_media_video_file')->entity;
       if ($file) {
         $uri = $file->getFileUri();
@@ -164,7 +164,7 @@ function orbit_media_entity_operation(EntityInterface $entity) {
  * Save some basic image dimention data to the media entity so we can use it
  * in views.
  */
-function orbit_media_media_presave(\Drupal\media\MediaInterface $media) {
+function orbit_media_media_presave(MediaInterface $media) {
   // Only act on new entities (insert, not update).
   if (!$media->isNew()) {
     return;
@@ -181,20 +181,23 @@ function orbit_media_media_presave(\Drupal\media\MediaInterface $media) {
   $media->set('field_height', $item->height);
 }
 
+/**
+ *
+ */
 function orbit_media_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
   if ($view->id() == 'orbit_media' && $display_id === 'media_page_list') {
-    $options = array(
+    $options = [
       'id' => 'area_text_custom',
       'table' => 'views',
       'field' => 'area_text_custom',
       'relationship' => 'none',
-        'group_type' => 'none',
+      'group_type' => 'none',
       'admin_label' => '',
       'empty' => TRUE,
       'tokenize' => FALSE,
       'content' => orbit_page_footer(TRUE),
       'plugin_id' => 'text_custom',
-    );
+    ];
 
     $view->setHandler('media_page_list', 'footer', 'area_text_custom', $options);
   }
