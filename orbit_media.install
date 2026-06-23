@@ -14,6 +14,17 @@ use Drupal\Core\Entity\Entity\EntityViewDisplay;
  * Implements hook_install().
  */
 function orbit_media_install(): void {
+
+// Set some of the transliteration settings for file uploads to ensure that
+// ßfilenames are sanitized and consistent.
+  \Drupal::configFactory()->getEditable('file.settings')
+    ->set('filename_sanitization.transliterate', TRUE)
+    ->set('filename_sanitization.replace_whitespace', TRUE)
+    ->set('filename_sanitization.replace_non_alphanumeric', TRUE)
+    ->set('filename_sanitization.deduplicate_separators', TRUE)
+    ->set('filename_sanitization.lowercase', TRUE)
+    ->save();
+
   orbit_media_apply_media_image_displays();
   orbit_media_apply_media_video_displays();
 }
