@@ -12,6 +12,7 @@ dependencies:
   - dropzonejs:dropzonejs
   - image_widget_crop:image_widget_crop
   - glightbox:glightbox
+  - exif_orientation:exif_orientation
   - responsive_image:responsive_image
   - views_data_export:views_data_export
   - media_bulk_upload_dropzonejs:media_bulk_upload_dropzonejs

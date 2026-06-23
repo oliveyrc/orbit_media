@@ -8,6 +8,7 @@
     "drupal/media_library_edit": "*",
     "drupal/media_bulk_upload": "*",
     "drupal/image_widget_crop": "*",
+    "drupal/exif_orientation": "*",
     "drupal/dropzonejs": "*",
     "drupal/glightbox": "*",
     "drupal/views_data_export": "*"
